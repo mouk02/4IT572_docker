@@ -120,6 +120,5 @@ jobs:
           echo "${{ secrets.ANSIBLE_KEY }}" > devops.pem
           echo "${{ secrets.VAULT_PASS }}" > vault_pass
           chmod 400 devops.pem
-          ssh -i "devops.pem" ec2-user@ec2-54-242-120-119.compute-1.amazonaws.com
           ansible-playbook ansible/ec2_deploy.yml --vault-password-file vault_pass --key-file devops.pem --user ec2-user
   
