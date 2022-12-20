@@ -104,3 +104,14 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           FIREBASE_PROJECT: moudra-devops
           
+      - name: Install Ansible
+        run: |
+          pip3 install ansible boto boto3
+
+      - name: Connect To Ansible
+          
+        run: |
+          chmod 400 devops.pem
+          ssh -i "devops.pem" ec2-user@ec2-54-242-120-119.compute-1.amazonaws.com
+          ansible-playbook ec2_deploy.yml --ask-vault-pass --user ec2-user --key-file ../devops.pem
+  
