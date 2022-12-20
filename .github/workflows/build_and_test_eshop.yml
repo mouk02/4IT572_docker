@@ -111,6 +111,7 @@ jobs:
       - name: Connect To Ansible
           
         run: |
+          echo "${{ secrets.ANSIBLE_KEY }}" > devops.pem
           chmod 400 devops.pem
           ssh -i "devops.pem" ec2-user@ec2-54-242-120-119.compute-1.amazonaws.com
           ansible-playbook ec2_deploy.yml --ask-vault-pass --user ec2-user --key-file ../devops.pem
